@@ -1,0 +1,47 @@
+version: "3.8"
+#above version of docker compose is mentioned
+services:
+  api:
+    build: ./api
+    #how we build the image - relative path to the folder where the Dockerfile for the project is - because docker compose needs to use Dockerfile to create the image for our service
+    #./api - it saying build the image inside the api folder
+    container_name: api_c
+    ports:
+      - '4000:4000'
+      #port mapping
+      #should start with hypen and should be indented
+      #if more than one port mapping, we can list here in the same way starting with hypen
+    volumes:
+      - ./api:/app
+      #map api folder to app folder in the container
+      #it's ok to use relative path - no need of using aboslute path
+      - ./app/node_modules
+      #it's to ensure node_modules in app folder does not get deleted by making changes to local node modules folder
+      
+
+#services have multiple nested properties telling - how to build the image for this service and also how to run this container
+
+
+
+#we need to make this file on root directory, at this moment only api folder exist in root directory, but later we might need to create front end or some other directories
+
+
+
+
+#How to run docker compose file
+
+#To clean all images and containers already made
+#docker system prune
+
+#Then go inside the root directory - Not inside the api folder
+#docker-compose up
+
+#To stop
+#docker-compose down
+
+#To stop and delete all images and containers created by this (not volumes)
+#docker-compose down --rmi all
+#rmi means remove images
+
+#To stop and delete all images and containers created by this and volumes
+#docker-compose down --rmi all -v
